@@ -1,6 +1,10 @@
 ﻿namespace CourseSales.Services.Catalog.Entities
 {
-    public abstract class BaseEntity
+    public  interface IEntity
+    {
+    }
+
+    public abstract class BaseEntity : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
