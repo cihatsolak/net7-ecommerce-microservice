@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{2087168D-9870-41E9-8E55-53F18968836C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{9CEC59E8-4DFC-4441-931D-1D5D9582C913}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseSales.Services.Catalog", "services\catalog\CourseSales.Services.Catalog\CourseSales.Services.Catalog.csproj", "{39A9BD42-147D-4AA8-B562-B5B2086DDAB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5CBEC6EB-BB0A-4A61-9341-32B922BA8657}"
+	ProjectSection(SolutionItems) = preProject
+		ServicePorts.txt = ServicePorts.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39A9BD42-147D-4AA8-B562-B5B2086DDAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A9BD42-147D-4AA8-B562-B5B2086DDAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A9BD42-147D-4AA8-B562-B5B2086DDAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A9BD42-147D-4AA8-B562-B5B2086DDAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9CEC59E8-4DFC-4441-931D-1D5D9582C913} = {2087168D-9870-41E9-8E55-53F18968836C}
+		{39A9BD42-147D-4AA8-B562-B5B2086DDAB7} = {9CEC59E8-4DFC-4441-931D-1D5D9582C913}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C59F3D3-EE97-4C94-B0B3-5B7D721B917F}
+	EndGlobalSection
+EndGlobal
