@@ -12,3 +12,5 @@ global using MongoDB.Driver;
 global using System.Net;
 global using CourseSales.Services.Catalog.Services;
 global using CourseSales.Services.Catalog.Data;
+global using Microsoft.AspNetCore.Mvc;
+global using CourseSales.Shared.Controllers;

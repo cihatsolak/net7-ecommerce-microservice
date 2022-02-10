@@ -2,10 +2,10 @@
 {
     internal interface ICourseService
     {
-        Task<Response<NoContentResponse>> DeleteAsync(int id);
+        Task<Response<NoContentResponse>> DeleteByIdAsync(string id);
         Task<Response<List<CourseResponseModel>>> GetAllAsync();
         Task<Response<List<CourseResponseModel>>> GetAllByUserIdAsync(int userId);
-        Task<Response<CourseResponseModel>> GetByIdAsync(int id);
+        Task<Response<CourseResponseModel>> GetByIdAsync(string id);
         Task<Response<CourseResponseModel>> InsertAsync(AddCourseRequstModel addCourseRequstModel);
         Task<Response<NoContentResponse>> UpdateAsync(UpdateCourseRequestModel updateCourseRequestModel);
     }
@@ -40,9 +40,9 @@
             return Response<List<CourseResponseModel>>.Success(coursesResponseModel, HttpStatusCode.OK);
         }
 
-        public async Task<Response<CourseResponseModel>> GetByIdAsync(int id)
+        public async Task<Response<CourseResponseModel>> GetByIdAsync(string id)
         {
-            if (0 >= id)
+            if (string.IsNullOrWhiteSpace(id))
                 throw new ArgumentNullException(nameof(id));
 
             var course = await _mongoContext.Courses.Find(filter => filter.Id.Equals(id)).SingleOrDefaultAsync();
@@ -95,7 +95,7 @@
             return Response<NoContentResponse>.Success(HttpStatusCode.OK);
         }
 
-        public async Task<Response<NoContentResponse>> DeleteAsync(int id)
+        public async Task<Response<NoContentResponse>> DeleteByIdAsync(string id)
         {
             var deleteResult = await _mongoContext.Courses.DeleteOneAsync(filter => filter.Id.Equals(id));
             if (0 >= deleteResult.DeletedCount)

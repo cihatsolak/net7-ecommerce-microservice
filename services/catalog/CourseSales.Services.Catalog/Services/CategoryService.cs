@@ -3,8 +3,8 @@
     internal interface ICategoryService
     {
         Task<Response<List<CategoryResponseModel>>> GetAllAsync();
-        Task<Response<CategoryResponseModel>> GetById(int id);
-        Task<Response<CategoryResponseModel>> InsertAsync(Category category);
+        Task<Response<CategoryResponseModel>> GetByIdAsync(string id);
+        Task<Response<CategoryResponseModel>> InsertAsync(AddCategoryRequestModel addCategoryRequestModel);
     }
 
     internal sealed class CategoryManager : ICategoryService
@@ -32,9 +32,9 @@
             return Response<List<CategoryResponseModel>>.Success(categoriesResponseModel, HttpStatusCode.OK);
         }
 
-        public async Task<Response<CategoryResponseModel>> GetById(int id)
+        public async Task<Response<CategoryResponseModel>> GetByIdAsync(string id)
         {
-            if (0 >= id)
+            if (string.IsNullOrWhiteSpace(id))
                 throw new ArgumentNullException(nameof(id));
 
             var category = await _mongoContext.Categories.Find(filter => filter.Id.Equals(id)).SingleOrDefaultAsync();
@@ -47,8 +47,10 @@
             return Response<CategoryResponseModel>.Success(categoryResponseModel, HttpStatusCode.OK);
         }
 
-        public async Task<Response<CategoryResponseModel>> InsertAsync(Category category)
+        public async Task<Response<CategoryResponseModel>> InsertAsync(AddCategoryRequestModel addCategoryRequestModel)
         {
+            var category = _mapper.Map<Category>(addCategoryRequestModel);
+
             await _mongoContext.Categories.InsertOneAsync(category);
             var categoryResponseModel = _mapper.Map<CategoryResponseModel>(category);
             return Response<CategoryResponseModel>.Success(categoryResponseModel, HttpStatusCode.OK);
