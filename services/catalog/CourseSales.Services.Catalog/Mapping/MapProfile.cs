@@ -5,6 +5,7 @@
         public MapProfile()
         {
             CourseMaps();
+            CategoryMaps();
         }
 
         private void CourseMaps()
@@ -17,6 +18,11 @@
 
             CreateMap<AddCourseRequstModel, Course>();
             CreateMap<UpdateCourseRequstModel, Course>();
+        }
+
+        private void CategoryMaps()
+        {
+            CreateMap<AddCategoryRequestModel, Category>();
         }
     }
 }

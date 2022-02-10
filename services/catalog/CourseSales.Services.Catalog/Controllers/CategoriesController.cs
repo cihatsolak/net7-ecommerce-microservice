@@ -1,6 +1,6 @@
 ﻿namespace CourseSales.Services.Catalog.Controllers
 {
-    internal class CategoriesController : BaseApiController
+    public sealed class CategoriesController : BaseApiController
     {
         private readonly ICategoryService _categoryService;
 
@@ -16,7 +16,7 @@
             return CreateActionResultInstance(categories);
         }
 
-        [HttpGet("{id:minlength(1}")]
+        [HttpGet("{id:minlength(1)}")]
         public async Task<IActionResult> GetById(string id)
         {
             var category = await _categoryService.GetByIdAsync(id);

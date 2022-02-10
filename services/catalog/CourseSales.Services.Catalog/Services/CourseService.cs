@@ -1,6 +1,6 @@
 ﻿namespace CourseSales.Services.Catalog.Services
 {
-    internal interface ICourseService
+    public interface ICourseService
     {
         Task<Response<NoContentResponse>> DeleteByIdAsync(string id);
         Task<Response<List<CourseResponseModel>>> GetAllAsync();
@@ -10,7 +10,7 @@
         Task<Response<NoContentResponse>> UpdateAsync(UpdateCourseRequestModel updateCourseRequestModel);
     }
 
-    internal sealed class CourseManager : ICourseService
+    public sealed class CourseManager : ICourseService
     {
         private readonly IMongoContext _mongoContext;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@
         public async Task<Response<List<CourseResponseModel>>> GetAllAsync()
         {
             var courses = await _mongoContext.Courses.Find(filter => true).ToListAsync();
-            if (courses?.Any() ?? false)
+            if (!courses?.Any() ?? false)
             {
                 return Response<List<CourseResponseModel>>.Fail("Kurs bulunamadı.", HttpStatusCode.NotFound);
             }
