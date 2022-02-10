@@ -7,6 +7,9 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.Configure<DatabaseSetting>(builder.Configuration.GetRequiredSection(nameof(DatabaseSetting)));
 builder.Services.AddSingleton<IDatabaseSetting>(provider => provider.GetRequiredService<IOptions<DatabaseSetting>>().Value);
 
+builder.Services.AddScoped<IMongoContext, MongoContext>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

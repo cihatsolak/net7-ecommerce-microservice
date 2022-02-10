@@ -2,17 +2,17 @@
 {
     public interface IDatabaseSetting
     {
-        string CourseCollectionName { get; set; }
-        string CategoryCollectionName { get; set; }
-        string ConnectionString { get; set; }
-        string DatabaseName { get; set; }
+        string CourseCollectionName { get; init; }
+        string CategoryCollectionName { get; init; }
+        string ConnectionString { get; init; }
+        string DatabaseName { get; init; }
     }
 
-    public class DatabaseSetting : IDatabaseSetting
+    public record DatabaseSetting : IDatabaseSetting
     {
-        public string CourseCollectionName { get; set; }
-        public string CategoryCollectionName { get; set; }
-        public string ConnectionString { get; set; }
-        public string DatabaseName { get; set; }
+        public string CourseCollectionName { get; init; }
+        public string CategoryCollectionName { get; init; }
+        public string ConnectionString { get; init; }
+        public string DatabaseName { get; init; }
     }
 }

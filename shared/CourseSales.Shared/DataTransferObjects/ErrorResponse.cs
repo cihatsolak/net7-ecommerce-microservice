@@ -1,6 +1,4 @@
 ﻿namespace CourseSales.Shared.DataTransferObjects
 {
-    public class NoContentDto
-    {
-    }
+    public record ErrorResponse(List<string> Errors);
 }
