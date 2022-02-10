@@ -1,13 +1,13 @@
 ﻿namespace CourseSales.Services.Catalog.Services
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         Task<Response<List<CategoryResponseModel>>> GetAllAsync();
         Task<Response<CategoryResponseModel>> GetByIdAsync(string id);
         Task<Response<CategoryResponseModel>> InsertAsync(AddCategoryRequestModel addCategoryRequestModel);
     }
 
-    internal sealed class CategoryManager : ICategoryService
+    public sealed class CategoryManager : ICategoryService
     {
         private readonly IMongoContext _mongoContext;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@
         public async Task<Response<List<CategoryResponseModel>>> GetAllAsync()
         {
             var categories = await _mongoContext.Categories.Find(filter => true).ToListAsync();
-            if (categories?.Any() ?? false)
+            if (!categories?.Any() ?? false)
             {
                 return Response<List<CategoryResponseModel>>.Fail("Category bulunamadı.", HttpStatusCode.NotFound);
             }
