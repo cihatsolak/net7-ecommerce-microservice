@@ -56,7 +56,8 @@ namespace CourseSales.IdentityServer
                         {
                             UserName = "cihat.solak",
                             Email = "test@test.com",
-                            PhoneNumber = "05555555555"
+                            PhoneNumber = "05555555555",
+                            City = "İstanbul"
                         }, "Password12+-").Wait();
                     }
                 }
