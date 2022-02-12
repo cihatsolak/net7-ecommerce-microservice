@@ -4,6 +4,7 @@ using CourseSales.Shared.DataTransferObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -38,6 +39,20 @@ namespace CourseSales.IdentityServer.Controllers
             }
 
             return Created(nameof(SignUp), null);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUser()
+        {
+            var userId = User.Claims.FirstOrDefault(p => p.Type.Equals(JwtRegisteredClaimNames.Sub)).Value;
+            var user = await _userManager.FindByIdAsync(userId);
+            return Ok(new
+            {
+                user.Id,
+                Username = user.UserName,
+                user.Email,
+                user.City
+            });
         }
     }
 }
