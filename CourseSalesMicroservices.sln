@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseSales.Services.Catalo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5CBEC6EB-BB0A-4A61-9341-32B922BA8657}"
 	ProjectSection(SolutionItems) = preProject
-		ServicePorts.txt = ServicePorts.txt
+		serviceports.txt = serviceports.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{0C07A41B-B6E6-4157-9708-EAD610BF4652}"

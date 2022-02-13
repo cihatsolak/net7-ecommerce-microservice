@@ -1,0 +1,3 @@
+Services
+- catalog api : 7001 & 7001
+- identity server : 5001
