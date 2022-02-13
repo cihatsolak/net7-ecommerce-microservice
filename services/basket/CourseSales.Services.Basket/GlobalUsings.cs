@@ -6,3 +6,6 @@ global using CourseSales.Services.Basket.Services.Redis;
 global using System.Net;
 global using System.Text.Json;
 global using CourseSales.Shared.Services;
+global using CourseSales.Shared.Controllers;
+global using CourseSales.Services.Basket.Services;
+global using Microsoft.AspNetCore.Mvc;

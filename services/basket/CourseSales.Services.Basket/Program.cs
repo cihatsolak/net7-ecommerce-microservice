@@ -3,10 +3,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+builder.Services.AddScoped<IBasketService, BasketService>();
 
 RedisSetting redisSetting = builder.Configuration.GetSection(nameof(RedisSetting)).Get<RedisSetting>();
-
 builder.Services.AddSingleton<IRedisService, RedisService>();
 builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect(new ConfigurationOptions
 {
