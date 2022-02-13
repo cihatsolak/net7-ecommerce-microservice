@@ -2,6 +2,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
 RedisSetting redisSetting = builder.Configuration.GetSection(nameof(RedisSetting)).Get<RedisSetting>();
 
