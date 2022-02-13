@@ -20,7 +20,7 @@
             return CreateActionResultInstance(Response<PhotoResponseModel>.Success(photoResponseModel, HttpStatusCode.Created));
         }
 
-        [HttpDelete("{photoUrl:minlenght(5)}")]
+        [HttpDelete("{photoUrl:minlength(5)}")]
         [ProducesResponseType(typeof(Response<PhotoResponseModel>), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Response<PhotoResponseModel>), (int)HttpStatusCode.NoContent)]
         public IActionResult Delete(string photoUrl)
