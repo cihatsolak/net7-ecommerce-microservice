@@ -2,3 +2,4 @@ Services
 - identity server : 5001
 - catalog api : 7001(https) & 7001(http)
 - photostock api : 7002(https) & 7003(http)
+- basket api : 7004(https) & 7005(http)
