@@ -14,6 +14,6 @@
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string UserId => _httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(claim => claim.Type.Equals("sub"))?.Value;
+        public string UserId => _httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(claim => claim.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
     }
 }

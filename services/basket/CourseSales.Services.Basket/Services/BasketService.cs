@@ -19,7 +19,7 @@
         public async Task<Response<BasketModel>> GetBasketAsync(string userId)
         {
             var basket = await _redisService.Database.StringGetAsync(userId);
-            if (basket.HasValue)
+            if (!basket.HasValue)
                 return Response<BasketModel>.Fail("Basket not found!", HttpStatusCode.NotFound);
 
             var basketResponseModel = JsonSerializer.Deserialize<BasketModel>(basket);
