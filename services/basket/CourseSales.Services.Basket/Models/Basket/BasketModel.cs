@@ -1,20 +1,20 @@
 ﻿namespace CourseSales.Services.Basket.Models.Basket
 {
-    public class BasketResponseModel
+    public class BasketModel
     {
-        public BasketResponseModel()
+        public BasketModel()
         {
-            BasketItemsResponseModel = new();
+            BasketItemModel = new();
         }
 
         public string UserId { get; set; }
         public string DiscountCode { get; set; }
-        public List<BasketItemResponseModel> BasketItemsResponseModel { get; set; }
+        public List<BasketItemModel> BasketItemModel { get; set; }
 
-        public decimal TotalPrice => BasketItemsResponseModel.Sum(item => item.Price * item.Quantity);
+        public decimal TotalPrice => BasketItemModel.Sum(item => item.Price * item.Quantity);
     }
 
-    public class BasketItemResponseModel
+    public class BasketItemModel
     {
         public int Quantity { get; set; }
         public string CourseId { get; set; }

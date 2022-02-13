@@ -5,7 +5,7 @@
         [HttpPost]
         [ProducesResponseType(typeof(Response<PhotoResponseModel>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(Response<PhotoResponseModel>), (int)HttpStatusCode.Created)]
-        public async Task<IActionResult> Save(IFormFile photo, CancellationToken cancellationToken)
+        public async Task<IActionResult> Add(IFormFile photo, CancellationToken cancellationToken)
         {
             if (photo is null || 0 >= photo?.Length)
                 return CreateActionResultInstance(Response<PhotoResponseModel>.Fail("Photo is empty!", HttpStatusCode.BadRequest));
