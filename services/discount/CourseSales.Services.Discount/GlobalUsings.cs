@@ -1,0 +1,9 @@
+﻿global using Dapper.Contrib.Extensions;
+global using CourseSales.Services.Discount.Models;
+global using CourseSales.Shared.DataTransferObjects;
+global using Dapper;
+global using Mapster;
+global using System.Data;
+global using System.Net;
+global using CourseSales.Services.Discount.Services;
+global using Npgsql;
