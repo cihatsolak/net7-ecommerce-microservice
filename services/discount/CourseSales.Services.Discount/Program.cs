@@ -29,6 +29,7 @@ builder.Services.AddScoped<IDbConnection>(provider =>
 builder.Services.AddScoped<IDiscountService, DiscountService>();
 
 var app = builder.Build();
+app.UseAuthentication();
 
 if (app.Environment.IsDevelopment())
 {
