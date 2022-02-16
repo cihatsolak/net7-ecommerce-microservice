@@ -1,0 +1,15 @@
+﻿global using Dapper.Contrib.Extensions;
+global using CourseSales.Services.Discount.Models;
+global using CourseSales.Shared.DataTransferObjects;
+global using Dapper;
+global using Mapster;
+global using System.Data;
+global using System.Net;
+global using CourseSales.Services.Discount.Services;
+global using Npgsql;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc.Authorization;
+global using CourseSales.Shared.Services;
+global using CourseSales.Shared.Controllers;
+global using Microsoft.AspNetCore.Mvc;
