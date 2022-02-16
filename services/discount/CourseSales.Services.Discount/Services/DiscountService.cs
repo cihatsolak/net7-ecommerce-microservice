@@ -52,7 +52,7 @@
             return Response<DiscountResponseModel>.Success(discountResponseModel, HttpStatusCode.NotFound);
         }
 
-        public async Task<Response<NoContentResponse>> SaveAsync(DiscountRequestModel discountRequestModel)
+        public async Task<Response<NoContentResponse>> AddAsync(DiscountRequestModel discountRequestModel)
         {
             var discount = discountRequestModel.Adapt<Entities.Discount>();
             bool succeeded = await _dbConnection.ExecuteAsync("INSERT INTO discount (userid,rate,code) VALUES(@UserId,@Rate,@Code)", discount) > 0;

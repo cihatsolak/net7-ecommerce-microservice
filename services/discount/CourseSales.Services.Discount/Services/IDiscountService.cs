@@ -6,7 +6,7 @@
 
         Task<Response<DiscountResponseModel>> GetByIdAsync(int id);
 
-        Task<Response<NoContentResponse>> SaveAsync(DiscountRequestModel discountRequestModel);
+        Task<Response<NoContentResponse>> AddAsync(DiscountRequestModel discountRequestModel);
 
         Task<Response<NoContentResponse>> UpdateAsync(DiscountRequestModel discountRequestModel);
 
