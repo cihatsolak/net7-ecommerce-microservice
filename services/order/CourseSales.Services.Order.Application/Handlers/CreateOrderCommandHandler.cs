@@ -12,11 +12,11 @@
         public async Task<Response<CreatedOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             Address address = new(
-                request.AddressDto.Province,
-                request.AddressDto.District,
-                request.AddressDto.Street,
-                request.AddressDto.ZipCode,
-                request.AddressDto.Line);
+                request.Address.Province,
+                request.Address.District,
+                request.Address.Street,
+                request.Address.ZipCode,
+                request.Address.Line);
 
             Domain.OrderAggregate.Order newOrder = new Domain.OrderAggregate.Order(request.BuyerId, address);
 
