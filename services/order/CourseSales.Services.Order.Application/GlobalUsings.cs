@@ -8,3 +8,4 @@ global using CourseSales.Services.Order.Infrastructure;
 global using Microsoft.EntityFrameworkCore;
 global using System.Net;
 global using CourseSales.Services.Order.Application.Commands;
+global using CourseSales.Services.Order.Application.Mapping;

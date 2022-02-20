@@ -1,6 +1,4 @@
-﻿using CourseSales.Services.Order.Application.Mapping;
-
-namespace CourseSales.Services.Order.Application.Handlers
+﻿namespace CourseSales.Services.Order.Application.Handlers
 {
     public class GetOrdersByUserIdQueryHandler : IRequestHandler<GetOrdersByUserIdQuery, Response<List<OrderDto>>>
     {
