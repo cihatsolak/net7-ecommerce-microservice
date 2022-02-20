@@ -1,0 +1,12 @@
+﻿global using CourseSales.Services.Order.Infrastructure;
+global using Microsoft.EntityFrameworkCore;
+global using CourseSales.Services.Order.Application.Commands;
+global using CourseSales.Services.Order.Application.Queries;
+global using CourseSales.Shared.Controllers;
+global using CourseSales.Shared.Services;
+global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
+global using CourseSales.Services.Order.Application.Handlers;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc.Authorization;
