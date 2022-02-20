@@ -8,6 +8,10 @@ builder.Services.AddDbContext<OrderDbContext>(opt =>
     });
 });
 
+builder.Services.AddMediatR(typeof(CreateOrderCommandHandler).Assembly);
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -19,8 +19,4 @@
     <ProjectReference Include="..\CourseSales.Services.Order.Application\CourseSales.Services.Order.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
