@@ -11,7 +11,7 @@
     "CourseSales.Gateway": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "applicationUrl": "https://localhost:4500;http://localhost:4501",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
