@@ -1,4 +1,5 @@
 Services
+- gateway api: 4500(https) & 4501(http)
 - identity server : 5001
 - catalog api : 7001(https) & 7001(http)
 - photostock api : 7002(https) & 7003(http)
