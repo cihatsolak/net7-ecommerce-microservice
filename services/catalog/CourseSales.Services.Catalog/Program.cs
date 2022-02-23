@@ -25,6 +25,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 
+await using (AsyncServiceScope asyncServiceScope = app.Services.CreateAsyncScope())
+{
+    IServiceProvider serviceProvider = asyncServiceScope.ServiceProvider;
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+    var categories = await categoryService.GetAllAsync();
+    if (categories.Data is null || !categories.Data.Any())
+    {
+        await categoryService.InsertAsync(new AddCategoryRequestModel
+        {
+            Name = "Sýfýrdan Ýleri Seviye Vue.JS Eðitimi ve Uygulama Geliþtirme"
+        });
+
+        await categoryService.InsertAsync(new AddCategoryRequestModel
+        {
+            Name = "Azure DevOps : Sýfýrdan Ýleri Seviye"
+        });
+    }
+};
+
 app.UseAuthentication();
 
 // Configure the HTTP request pipeline.
