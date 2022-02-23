@@ -9,6 +9,13 @@ builder.WebHost.ConfigureAppConfiguration((hostingContext, configure) =>
 
 builder.Services.AddOcelot();
 
+builder.Services.AddAuthentication().AddJwtBearer("GatewayAuthenticationSchema", options =>
+{
+    options.Authority = builder.Configuration["IdentityServerUrl"];
+    options.Audience = "resource_gateway";
+    options.RequireHttpsMetadata = false;
+});
+
 var app = builder.Build();
 app.UseHttpsRedirection();
 await app.UseOcelot();
