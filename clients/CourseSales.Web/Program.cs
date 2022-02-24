@@ -3,8 +3,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetRequiredSection(nameof(ServiceApiSettings)));
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetRequiredSection(nameof(ClientSettings)));
 
+builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, configure =>
+    {
+        configure.LoginPath = new PathString("/Auth/SignIn");
+        configure.ExpireTimeSpan = TimeSpan.FromDays(60);
+        configure.SlidingExpiration = true;
+        configure.Cookie.Name = "CourseSales.Web";
+    });
 
 var app = builder.Build();
 
@@ -19,6 +30,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
