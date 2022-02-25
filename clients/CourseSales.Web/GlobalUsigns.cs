@@ -13,3 +13,4 @@ global using System.Security.Claims;
 global using System.Text.Json;
 global using Microsoft.AspNetCore.Mvc;
 global using CourseSales.Web.Services.IdentityServices;
+global using CourseSales.Web.Services.UserServices;
