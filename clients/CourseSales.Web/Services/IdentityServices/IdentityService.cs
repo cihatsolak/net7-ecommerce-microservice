@@ -75,7 +75,27 @@
 
         public async Task RevokeRefreshTokenAsync()
         {
-            throw new NotImplementedException();
+            var discoveryDocumentResponse = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = _serviceApiSettings.BaseUri,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+
+            if (discoveryDocumentResponse.IsError)
+                throw discoveryDocumentResponse.Exception;
+
+            var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+            TokenRevocationRequest tokenRevocationRequest = new()
+            {
+                ClientId = _clientSettings.WebClientForUser.ClientId,
+                ClientSecret = _clientSettings.WebClientForUser.ClientSecret,
+                Address = discoveryDocumentResponse.RevocationEndpoint,
+                Token = refreshToken,
+                TokenTypeHint = OpenIdConnectParameterNames.RefreshToken
+            };
+
+            await _httpClient.RevokeTokenAsync(tokenRevocationRequest);
         }
 
         public async Task<Response<bool>> SignInAsync(SigninInput signinInput)
