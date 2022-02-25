@@ -9,7 +9,7 @@
             _client = client;
         }
 
-        public async Task<UserViewModel> GetUser()
+        public async Task<UserViewModel> GetUserAsync()
         {
             return await _client.GetFromJsonAsync<UserViewModel>("/api/user/getuser");
         }

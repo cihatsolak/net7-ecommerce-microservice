@@ -1,8 +1,4 @@
-﻿using CourseSales.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-namespace CourseSales.Web.Controllers
+﻿namespace CourseSales.Web.Controllers
 {
     public class HomeController : Controller
     {

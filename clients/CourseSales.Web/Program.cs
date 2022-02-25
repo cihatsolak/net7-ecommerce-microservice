@@ -6,6 +6,8 @@ var serviceApiSettings = builder.Configuration.GetSection(nameof(ServiceApiSetti
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetRequiredSection(nameof(ClientSettings)));
 
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+
+builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 builder.Services.AddHttpClient<IUserService, UserService>(options =>
 {
     options.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);

@@ -2,5 +2,6 @@
 {
     public interface IUserService
     {
+        Task<UserViewModel> GetUserAsync();
     }
 }
