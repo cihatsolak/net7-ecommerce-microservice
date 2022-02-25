@@ -34,5 +34,12 @@
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await _identityService.RevokeRefreshTokenAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
     }
 }
