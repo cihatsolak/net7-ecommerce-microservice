@@ -21,7 +21,56 @@
 
         public async Task<TokenResponse> GetAccessTokenByRefreshTokenAsync()
         {
-            throw new NotImplementedException();
+            var discoveryDocumentResponse = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = _serviceApiSettings.BaseUri,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+
+            if (discoveryDocumentResponse.IsError)
+                throw discoveryDocumentResponse.Exception;
+
+            var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+            RefreshTokenRequest refreshTokenRequest = new()
+            {
+                ClientId = _clientSettings.WebClientForUser.ClientId,
+                ClientSecret = _clientSettings.WebClientForUser.ClientSecret,
+                RefreshToken = refreshToken,
+                Address = discoveryDocumentResponse.TokenEndpoint
+            };
+
+            var tokenResponse = await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
+            if (tokenResponse.IsError)
+                return null;
+
+            List<AuthenticationToken> authenticationTokens = new()
+            {
+                new AuthenticationToken 
+                { 
+                    Name = OpenIdConnectParameterNames.AccessToken,
+                    Value = tokenResponse.AccessToken
+                },
+                new AuthenticationToken
+                { 
+                    Name = OpenIdConnectParameterNames.RefreshToken,
+                    Value = tokenResponse.RefreshToken
+                },
+                new AuthenticationToken
+                { 
+                    Name = OpenIdConnectParameterNames.ExpiresIn,
+                    Value = DateTime.Now.AddSeconds(tokenResponse.ExpiresIn).ToString("o",CultureInfo.InvariantCulture)
+                }
+            };
+
+            var authenticationResult = await _httpContextAccessor.HttpContext.AuthenticateAsync();
+
+            var authenticationProperties = authenticationResult.Properties;
+            authenticationProperties.StoreTokens(authenticationTokens);
+
+            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, authenticationResult.Principal, authenticationProperties);
+
+            return tokenResponse;
         }
 
         public async Task RevokeRefreshTokenAsync()
