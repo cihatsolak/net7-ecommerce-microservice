@@ -14,3 +14,6 @@ global using System.Text.Json;
 global using Microsoft.AspNetCore.Mvc;
 global using CourseSales.Web.Services.IdentityServices;
 global using CourseSales.Web.Services.UserServices;
+global using System.Net.Http.Headers;
+global using CourseSales.Web.Exceptions;
+global using CourseSales.Web.Handlers;
