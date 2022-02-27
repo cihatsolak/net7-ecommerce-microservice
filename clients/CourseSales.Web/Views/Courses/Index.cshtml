@@ -1,0 +1,52 @@
+﻿@model List<CourseViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kurslar</h5>
+                <a asp-controller="Courses" asp-action="Create" class="btn btn-primary mb-3">Kurs oluştur</a>
+                 @if (Model.Any())
+                 {
+                     <table class="table table-striped table-bordered">
+                         <thead>
+                             <tr>
+                                 <th>Resim</th>
+                                 <th>Kurs isim</th>
+                                 <th>Fiyat</th>
+                                 <th>Süre</th>
+                                 <th>Kategori</th>
+                                 <th>İşlemler</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach (var item in Model)
+                             {
+                                 <tr>
+                                     <td>@item.Name</td>
+                                     <td>@item.Price</td>
+                                     <td>@item.Feature.Duration</td>
+                                     <td>@item.Category.Name</td>
+                                     <td>
+                                         <a asp-controller="Courses" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success btn-sm">Güncelle</a>
+                                         <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                                     </td>
+                                 </tr>
+                             }
+                         </tbody>
+                     </table>
+                 }
+                else
+                {
+                    <div class="alert alert-info">
+                        Kayıtlı kurs bulunamadı
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
