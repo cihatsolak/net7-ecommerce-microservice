@@ -1,4 +1,6 @@
-﻿namespace CourseSales.Web.Handlers
+﻿using Microsoft.Net.Http.Headers;
+
+namespace CourseSales.Web.Handlers
 {
     public class ClientCredentialTokenHandler : DelegatingHandler
     {
@@ -11,7 +13,8 @@
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await _clientCredentialTokenService.GetTokenAsync());
+            string accessToken = await _clientCredentialTokenService.GetTokenAsync();
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var httpResponseMessage = await base.SendAsync(request, cancellationToken);
 

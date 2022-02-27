@@ -2,16 +2,16 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7001
+          "Port": 7000
         }
       ],
       "UpstreamPathTemplate": "/services/catalog/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "catalog_fullpermission" ]
@@ -19,7 +19,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -28,7 +28,7 @@
       ],
       "UpstreamPathTemplate": "/services/photostock/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "photo_stock_fullpermission" ]
@@ -36,7 +36,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -45,7 +45,7 @@
       ],
       "UpstreamPathTemplate": "/services/basket/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "basket_fullpermission" ]
@@ -53,7 +53,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -62,7 +62,7 @@
       ],
       "UpstreamPathTemplate": "/services/discount/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "discount_fullpermission" ]
@@ -70,7 +70,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -79,7 +79,7 @@
       ],
       "UpstreamPathTemplate": "/services/order/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "order_fullpermission" ]
@@ -87,7 +87,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -96,7 +96,7 @@
       ],
       "UpstreamPathTemplate": "/services/payment/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "payment_fullpermission" ]
@@ -104,6 +104,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:4500"
+    "BaseUrl": "https://localhost:4500"
   }
 }

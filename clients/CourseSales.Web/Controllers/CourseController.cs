@@ -1,12 +1,12 @@
 ﻿namespace CourseSales.Web.Controllers
 {
     [Authorize]
-    public class CoursesController : Controller
+    public class CourseController : Controller
     {
         private readonly ICatalogService _catalogService;
         private readonly ISharedIdentityService _sharedIdentityService;
 
-        public CoursesController(
+        public CourseController(
             ICatalogService catalogService, 
             ISharedIdentityService sharedIdentityService)
         {

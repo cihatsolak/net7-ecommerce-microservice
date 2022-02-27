@@ -5,6 +5,7 @@ var serviceApiSettings = builder.Configuration.GetSection(nameof(ServiceApiSetti
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetRequiredSection(nameof(ClientSettings)));
 
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
@@ -17,9 +18,10 @@ builder.Services.AddHttpClient<IUserService, UserService>(options =>
 
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(options =>
 {
-    options.BaseAddress = new Uri($"{serviceApiSettings.IdentityBaseUri}{serviceApiSettings.Catalog}");
+    options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}{serviceApiSettings.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
+builder.Services.AddAccessTokenManagement();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();

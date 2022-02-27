@@ -14,6 +14,7 @@ builder.Services.AddSingleton<IDatabaseSetting>(provider => provider.GetRequired
 
 builder.Services.AddScoped<IMongoContext, MongoContext>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<ICourseService, CourseManager>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
