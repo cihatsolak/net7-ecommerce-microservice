@@ -24,3 +24,4 @@ global using CourseSales.Shared.Services;
 global using CourseSales.Web.Services.Catalogs;
 global using IdentityModel.AspNetCore.AccessTokenManagement;
 global using CourseSales.Web.Services.Clients;
+global using Microsoft.AspNetCore.Mvc.Rendering;

@@ -10,9 +10,9 @@
         public string ImagePath { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public FeatureResponseModel FeatureResponseModel{ get; set; }
+        public FeatureResponseModel Feature { get; set; }
 
         public string CategoryId { get; set; }
-        public CategoryResponseModel CategoryResponseModel { get; set; }
+        public CategoryResponseModel Category { get; set; }
     }
 }

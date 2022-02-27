@@ -60,7 +60,7 @@
         public async Task<Response<List<CourseResponseModel>>> GetAllByUserIdAsync(string userId)
         {
             var courses = await _mongoContext.Courses.Find(filter => filter.UserId.Equals(userId)).ToListAsync();
-            if (courses?.Any() ?? false)
+            if (!courses?.Any() ?? false)
             {
                 return Response<List<CourseResponseModel>>.Fail("Kurs bulunamadı.", HttpStatusCode.NotFound);
             }

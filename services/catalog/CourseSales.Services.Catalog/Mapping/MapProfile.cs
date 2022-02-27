@@ -6,13 +6,12 @@
         {
             CourseMaps();
             CategoryMaps();
+            FeatureMaps();
         }
 
         private void CourseMaps()
         {
-            CreateMap<Course, CourseResponseModel>()
-                .ForMember(dest => dest.FeatureResponseModel, opt => opt.MapFrom(src => src.Feature));
-
+            CreateMap<Course, CourseResponseModel>();
             CreateMap<Category, CategoryResponseModel>();
             CreateMap<Feature, FeatureResponseModel>();
 
@@ -23,6 +22,11 @@
         private void CategoryMaps()
         {
             CreateMap<AddCategoryRequestModel, Category>();
+        }
+
+        private void FeatureMaps()
+        {
+            CreateMap<FeatureRequestModel, Feature>();
         }
     }
 }

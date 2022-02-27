@@ -16,7 +16,7 @@
         public string UserId { get; set; }
 
         public string Picture { get; set; }
-        public FeatureViewModel FeatureViewModel { get; set; }
+        public FeatureViewModel Feature { get; set; }
 
         [Display(Name = "Kategori")]
         public string CategoryId { get; set; }
