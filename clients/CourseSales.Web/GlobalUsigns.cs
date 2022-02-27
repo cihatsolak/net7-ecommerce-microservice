@@ -2,8 +2,8 @@
 global using CourseSales.Web.Exceptions;
 global using CourseSales.Web.Handlers;
 global using CourseSales.Web.Models;
-global using CourseSales.Web.Services.IdentityServices;
-global using CourseSales.Web.Services.UserServices;
+global using CourseSales.Web.Services.Identity;
+global using CourseSales.Web.Services.Users;
 global using CourseSales.Web.Settings;
 global using IdentityModel.Client;
 global using Microsoft.AspNetCore.Authentication;
@@ -19,3 +19,4 @@ global using System.Net.Http.Headers;
 global using System.Security.Claims;
 global using System.Text.Json;
 global using Microsoft.AspNetCore.Authorization;
+global using CourseSales.Web.Models.Catalog;

@@ -1,4 +1,4 @@
-﻿namespace CourseSales.Web.Services.UserServices
+﻿namespace CourseSales.Web.Services.Users
 {
     public interface IUserService
     {

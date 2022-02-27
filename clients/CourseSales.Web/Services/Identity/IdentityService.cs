@@ -1,4 +1,4 @@
-﻿namespace CourseSales.Web.Services.IdentityServices
+﻿namespace CourseSales.Web.Services.Identity
 {
     public sealed class IdentityService : IIdentityService
     {
