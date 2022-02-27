@@ -1,3 +1,5 @@
+using CourseSales.Web.Services.Catalogs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetRequiredSection(nameof(ServiceApiSettings)));
@@ -12,6 +14,11 @@ builder.Services.AddHttpClient<IUserService, UserService>(options =>
 {
     options.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<ICatalogService, CatalogService>(options =>
+{
+    options.BaseAddress = new Uri($"{serviceApiSettings.IdentityBaseUri}{serviceApiSettings.Catalog}");
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();

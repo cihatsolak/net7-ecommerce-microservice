@@ -23,8 +23,8 @@
             return CreateActionResultInstance(course);
         }
 
-        [HttpGet("{userId:int:min(1)}")]
-        public async Task<IActionResult> GetAllByUserId(int userId)
+        [HttpGet("{userId:minlength(1)}")]
+        public async Task<IActionResult> GetAllByUserId(string userId)
         {
             var courses = await _courseService.GetAllByUserIdAsync(userId);
             return CreateActionResultInstance(courses);
