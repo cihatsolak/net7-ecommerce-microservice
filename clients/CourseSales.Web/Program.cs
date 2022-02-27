@@ -8,6 +8,8 @@ builder.Services.Configure<ClientSettings>(builder.Configuration.GetRequiredSect
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+
 builder.Services.AddHttpClient<IUserService, UserService>(options =>
 {
     options.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
@@ -16,7 +18,7 @@ builder.Services.AddHttpClient<IUserService, UserService>(options =>
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(options =>
 {
     options.BaseAddress = new Uri($"{serviceApiSettings.IdentityBaseUri}{serviceApiSettings.Catalog}");
-});
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 builder.Services.AddHttpContextAccessor();
