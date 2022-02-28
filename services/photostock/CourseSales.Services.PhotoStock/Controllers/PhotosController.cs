@@ -15,7 +15,7 @@
             using FileStream fileStream = new(photoPath, FileMode.Create);
             await photo.CopyToAsync(fileStream, cancellationToken);
 
-            PhotoResponseModel photoResponseModel = new($"photos/{photo.FileName}");
+            PhotoResponseModel photoResponseModel = new($"{photo.FileName}");
 
             return CreateActionResultInstance(Response<PhotoResponseModel>.Success(photoResponseModel, HttpStatusCode.Created));
         }
@@ -25,7 +25,7 @@
         [ProducesResponseType(typeof(Response<PhotoResponseModel>), (int)HttpStatusCode.NoContent)]
         public IActionResult Delete(string photoUrl)
         {
-            string photoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos/", photoUrl);
+            string photoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
             if (!System.IO.File.Exists(photoPath))
                 return CreateActionResultInstance(Response<NoContentResponse>.Fail("Photo not found.", HttpStatusCode.NotFound));
 
