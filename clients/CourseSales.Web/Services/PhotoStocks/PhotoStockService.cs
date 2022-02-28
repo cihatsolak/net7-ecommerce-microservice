@@ -11,7 +11,7 @@
 
         public async Task<bool> DeletePhotoAsync(string photoUrl)
         {
-            var response = await _httpClient.DeleteAsync($"photos?photoUrl={photoUrl}");
+            var response = await _httpClient.DeleteAsync($"photos/delete/{photoUrl}");
             return response.IsSuccessStatusCode;
         }
 

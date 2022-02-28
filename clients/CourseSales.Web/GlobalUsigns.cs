@@ -26,3 +26,4 @@ global using IdentityModel.AspNetCore.AccessTokenManagement;
 global using CourseSales.Web.Services.Clients;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using CourseSales.Web.Services.PhotoStocks;
+global using CourseSales.Web.Helpers;

@@ -26,7 +26,7 @@ builder.Services.AddHttpClient<IPhotoStockService, PhotoStockService>(options =>
     options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}{serviceApiSettings.PhotoStock.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
-
+builder.Services.AddSingleton<PhotoHelper>();
 builder.Services.AddAccessTokenManagement();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 builder.Services.AddHttpContextAccessor();

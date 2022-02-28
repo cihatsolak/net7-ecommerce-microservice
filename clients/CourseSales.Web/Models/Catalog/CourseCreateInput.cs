@@ -11,7 +11,7 @@
         [Display(Name = "Fiyat")]
         public decimal Price { get; set; }
 
-        public string Picture { get; set; }
+        public string ImagePath { get; set; }
 
         public string UserId { get; set; }
 

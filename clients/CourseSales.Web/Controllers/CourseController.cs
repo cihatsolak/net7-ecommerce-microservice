@@ -64,8 +64,8 @@
                 Price = course.Price,
                 Feature = course.Feature,
                 CategoryId = course.CategoryId,
-                UserId = course.UserId
-                //Picture = course.Picture
+                UserId = course.UserId,
+                ImagePath = course.ImagePath
             };
 
             return View(courseUpdateInput);
