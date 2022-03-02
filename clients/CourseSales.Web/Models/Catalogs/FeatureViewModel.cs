@@ -1,4 +1,4 @@
-﻿namespace CourseSales.Web.Models.Catalog
+﻿namespace CourseSales.Web.Models.Catalogs
 {
     public class FeatureViewModel
     {

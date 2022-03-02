@@ -1,9 +1,7 @@
-﻿namespace CourseSales.Web.Models.Catalog
+﻿namespace CourseSales.Web.Models.Catalogs
 {
-    public class CourseUpdateInput
+    public class CourseCreateInput
     {
-        public string Id { get; set; }
-
         [Display(Name = "Ad")]
         public string Name { get; set; }
 
@@ -13,9 +11,10 @@
         [Display(Name = "Fiyat")]
         public decimal Price { get; set; }
 
+        public string ImagePath { get; set; }
+
         public string UserId { get; set; }
 
-        public string ImagePath { get; set; }
         public FeatureViewModel Feature { get; set; }
 
         [Display(Name = "Kategori")]
