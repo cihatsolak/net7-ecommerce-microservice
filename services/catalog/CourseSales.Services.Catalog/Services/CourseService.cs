@@ -31,9 +31,9 @@
                 return Response<List<CourseResponseModel>>.Fail("Kurs bulunamadı.", HttpStatusCode.NotFound);
             }
 
-            courses.ForEach(async course =>
+            courses.ForEach(course =>
             {
-                course.Category = await _mongoContext.Categories.Find(filter => filter.Id.Equals(course.CategoryId)).SingleOrDefaultAsync();
+                course.Category = _mongoContext.Categories.Find(filter => filter.Id.Equals(course.CategoryId)).SingleOrDefault();
             });
 
             var coursesResponseModel = _mapper.Map<List<CourseResponseModel>>(courses);

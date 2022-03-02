@@ -1,22 +1,30 @@
 ﻿namespace CourseSales.Web.Controllers
 {
-    public class HomeController : Controller
+    public sealed class HomeController : Controller
     {
+        private readonly ICatalogService _catalogService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            ICatalogService catalogService)
         {
             _logger = logger;
+            _catalogService = catalogService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var courses = await _catalogService.GetAllCourseAsync();
+            return View(courses);
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public async Task<IActionResult> Detail(string id)
         {
-            return View();
+            var course = await _catalogService.GetByCourseId(id);
+            return View(course);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

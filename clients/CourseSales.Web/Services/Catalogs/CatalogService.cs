@@ -90,6 +90,8 @@
             }
 
             var responseCourseViewModel = await httpResponseMessage.Content.ReadFromJsonAsync<Response<CourseViewModel>>();
+            responseCourseViewModel.Data.StockImagePath = _photoHelper.GetPhotoStockUrl(responseCourseViewModel.Data.ImagePath);
+
             return responseCourseViewModel.Data;
         }
 
