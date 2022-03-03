@@ -1,5 +1,6 @@
 ﻿namespace CourseSales.Web.Controllers
 {
+    [Authorize]
     public class BasketController : Controller
     {
         private readonly ICatalogService _catalogService;
