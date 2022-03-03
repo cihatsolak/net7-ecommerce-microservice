@@ -34,3 +34,4 @@ global using CourseSales.Web.Services.Baskets;
 global using CourseSales.Web.Extensions;
 global using FluentValidation.AspNetCore;
 global using CourseSales.Web.Validators;
+global using CourseSales.Web.Models.Discounts;
