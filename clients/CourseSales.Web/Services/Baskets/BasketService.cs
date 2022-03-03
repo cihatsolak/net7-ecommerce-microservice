@@ -3,14 +3,10 @@
     public sealed class BasketService : IBasketService
     {
         private readonly HttpClient _httpClient;
-        private readonly IDiscountService _discountService;
 
-        public BasketService(
-            HttpClient httpClient, 
-            IDiscountService discountService)
+        public BasketService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _discountService = discountService;
         }
 
         public async Task AddBasketItemAsync(BasketItemViewModel basketItemViewModel)
@@ -40,11 +36,6 @@
             if (basket is null)
                 return false;
 
-            var hasDiscount = await _discountService.GetDiscount(discountCode);
-            if (hasDiscount is null)
-                return false;
-
-            basket.ApplyDiscount(hasDiscount.Code, hasDiscount.Rate);
             await SaveOrUpdateAsync(basket);
             return true;
         }
@@ -104,5 +95,4 @@
             return httpResponseMessage.IsSuccessStatusCode;
         }
     }
-}
 }
