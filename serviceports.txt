@@ -7,3 +7,6 @@ Services
 - discount api: 7006(https) & 7007(http)
 - order api: 7008(https) & 7009(http)
 - payment api: 7010(https) & 7011(http)
+
+Clients
+- web 2500(https) & 2501(http)

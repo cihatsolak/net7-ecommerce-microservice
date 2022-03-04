@@ -4,7 +4,7 @@
     {
         Task<Response<NoContentResponse>> DeleteByIdAsync(string id);
         Task<Response<List<CourseResponseModel>>> GetAllAsync();
-        Task<Response<List<CourseResponseModel>>> GetAllByUserIdAsync(int userId);
+        Task<Response<List<CourseResponseModel>>> GetAllByUserIdAsync(string userId);
         Task<Response<CourseResponseModel>> GetByIdAsync(string id);
         Task<Response<CourseResponseModel>> InsertAsync(AddCourseRequstModel addCourseRequstModel);
         Task<Response<NoContentResponse>> UpdateAsync(UpdateCourseRequestModel updateCourseRequestModel);
@@ -31,9 +31,9 @@
                 return Response<List<CourseResponseModel>>.Fail("Kurs bulunamadı.", HttpStatusCode.NotFound);
             }
 
-            courses.ForEach(async course =>
+            courses.ForEach(course =>
             {
-                course.Category = await _mongoContext.Categories.Find(filter => filter.Id.Equals(course.CategoryId)).SingleOrDefaultAsync();
+                course.Category = _mongoContext.Categories.Find(filter => filter.Id.Equals(course.CategoryId)).SingleOrDefault();
             });
 
             var coursesResponseModel = _mapper.Map<List<CourseResponseModel>>(courses);
@@ -57,18 +57,18 @@
             return Response<CourseResponseModel>.Success(courseResponseModel, HttpStatusCode.OK);
         }
 
-        public async Task<Response<List<CourseResponseModel>>> GetAllByUserIdAsync(int userId)
+        public async Task<Response<List<CourseResponseModel>>> GetAllByUserIdAsync(string userId)
         {
             var courses = await _mongoContext.Courses.Find(filter => filter.UserId.Equals(userId)).ToListAsync();
-            if (courses?.Any() ?? false)
+            if (!courses?.Any() ?? false)
             {
                 return Response<List<CourseResponseModel>>.Fail("Kurs bulunamadı.", HttpStatusCode.NotFound);
             }
 
-            courses.ForEach(async course =>
+            foreach (var course in courses)
             {
                 course.Category = await _mongoContext.Categories.Find(filter => filter.Id.Equals(course.CategoryId)).SingleOrDefaultAsync();
-            });
+            }
 
             var coursesResponseModel = _mapper.Map<List<CourseResponseModel>>(courses);
             return Response<List<CourseResponseModel>>.Success(coursesResponseModel, HttpStatusCode.OK);
