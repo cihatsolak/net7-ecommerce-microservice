@@ -22,6 +22,7 @@ global using System.Text.Json;
 global using Microsoft.AspNetCore.Authorization;
 global using CourseSales.Web.Models.Catalogs;
 global using CourseSales.Shared.Services;
+global using CourseSales.Web.Models.Orders;
 global using CourseSales.Web.Services.Catalogs;
 global using IdentityModel.AspNetCore.AccessTokenManagement;
 global using CourseSales.Web.Services.Clients;

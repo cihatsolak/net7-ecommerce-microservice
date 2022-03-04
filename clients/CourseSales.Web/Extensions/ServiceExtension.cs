@@ -1,4 +1,6 @@
-﻿namespace CourseSales.Web.Extensions
+﻿using CourseSales.Web.Services.Orders;
+
+namespace CourseSales.Web.Extensions
 {
     public static class ServiceExtension
     {
@@ -43,6 +45,11 @@
             builder.Services.AddHttpClient<IPaymentService, PaymentService>(opt =>
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Payment.Path}");
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+            builder.Services.AddHttpClient<IOrderService, OrderService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Order.Path}");
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
         }
     }
