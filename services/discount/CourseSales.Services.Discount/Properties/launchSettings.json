@@ -12,7 +12,7 @@
     "CourseSales.Services.Discount": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7006;http://localhost:7007",
       "environmentVariables": {

@@ -10,7 +10,7 @@
         /// <summary>
         /// Asenkron iletişim- sipariş bilgileri rabbitMQ'ya gönderilecek
         /// </summary>
-        Task SuspendOrderAsync(CheckoutInfoInput checkoutInfoInput);
+        Task<OrderSuspendViewModel> SuspendOrderAsync(CheckoutInfoInput checkoutInfoInput);
 
         Task<List<OrderViewModel>> GetOrderAsync();
     }

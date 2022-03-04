@@ -25,15 +25,15 @@
         public async Task<IActionResult> Checkout(CheckoutInfoInput checkoutInfoInput)
         {
             //1. yol senkron iletişim
-            var orderStatus = await _orderService.CreateOrderAsync(checkoutInfoInput);
+            //var orderStatus = await _orderService.CreateOrderAsync(checkoutInfoInput);
             // 2.yol asenkron iletişim
-            //var orderSuspend = await _orderService.SuspendOrderAsync(checkoutInfoInput);
-            if (!orderStatus.IsSuccessful)
+            var orderSuspend = await _orderService.SuspendOrderAsync(checkoutInfoInput);
+            if (!orderSuspend.IsSuccessful)
             {
                 var basket = await _basketService.GetAsync();
 
                 ViewBag.Basket = basket;
-                ViewBag.Error = orderStatus.Error;
+                ViewBag.Error = orderSuspend.Error;
 
                 return View();
             }
@@ -46,7 +46,7 @@
 
         public IActionResult SuccessfulCheckout(int orderId)
         {
-            ViewBag.orderId = orderId;
+            ViewBag.OrderId = orderId;
             return View();
         }
 

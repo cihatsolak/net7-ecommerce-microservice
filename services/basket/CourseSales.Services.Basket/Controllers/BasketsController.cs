@@ -24,6 +24,7 @@
         [HttpPost]
         public async Task<IActionResult> AddOrUpdate(BasketModel basketModel)
         {
+            basketModel.UserId = _sharedIdentityService.UserId;
             var result = await _basketService.AddOrUpdateAsync(basketModel);
             return CreateActionResultInstance(result);
         }
