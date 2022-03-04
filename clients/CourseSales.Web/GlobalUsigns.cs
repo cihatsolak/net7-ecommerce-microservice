@@ -35,3 +35,4 @@ global using CourseSales.Web.Extensions;
 global using FluentValidation.AspNetCore;
 global using CourseSales.Web.Validators;
 global using CourseSales.Web.Models.Discounts;
+global using CourseSales.Web.Services.Discounts;

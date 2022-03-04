@@ -23,7 +23,9 @@
                         {
                             <tr>
                                 <td>@item.CourseName</td>
-                                <td> @item.GetCurrentPrice TL</td>
+                                <td>
+                                    @item.GetCurrentPrice TL @(Model.HasDiscount ? $"(%{Model.DiscountRate.Value} uygulandı)" : "")
+                                </td>
                                 <td>
                                     <a class="btn btn-danger" asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-courseId="@item.CourseId">sil</a>
                                 </td>
@@ -32,10 +34,12 @@
 
                         @if (Model.HasDiscount)
                         {
+
                             <tr>
                                 <td>Indirim oranı</td>
                                 <th colspan="2"> % @Model.DiscountRate.Value</th>
                             </tr>
+
                         }
 
                         <tr>
@@ -43,6 +47,33 @@
                             <th colspan="2">@Model.TotalPrice TL</th>
                         </tr>
                     </table>
+
+                    <form asp-controller="Basket" asp-action="ApplyDiscount">
+                        @if (Model.HasDiscount)
+                        {
+                            <div class="alert alert-success">
+                                "@Model.DiscountCode"indirim kodu uygulandı
+                                <a asp-controller="Basket" asp-action="CancelApplyDiscount"> (iptal et)</a>
+                            </div>
+
+                        }
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="DiscountApplyInput.Code">
+                            <button class="btn btn-outline-secondary" type="submit">Uygula</button>
+                        </div>
+
+                        @if (TempData["discountStatus"] != null && (bool)TempData["discountStatus"] == false)
+                        {
+                            <div class="text-danger">indirim kodu geçersiz</div>
+                        }
+                        @if (TempData["discountError"] != null)
+                        {
+                            <div class="text-danger">@TempData["discountError"]</div>
+                        }
+                    </form>
+                    <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Ödeme bilgileri</a>
+                    <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Kursları incelemeye devam et</a>
                 }
                 else
                 {

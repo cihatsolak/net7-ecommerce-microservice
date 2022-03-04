@@ -3,10 +3,14 @@
     public sealed class BasketService : IBasketService
     {
         private readonly HttpClient _httpClient;
+        private readonly IDiscountService _discountService;
 
-        public BasketService(HttpClient httpClient)
+        public BasketService(
+            HttpClient httpClient, 
+            IDiscountService discountService)
         {
             _httpClient = httpClient;
+            _discountService = discountService;
         }
 
         public async Task AddBasketItemAsync(BasketItemViewModel basketItemViewModel)
@@ -36,14 +40,19 @@
             if (basket is null)
                 return false;
 
+            var hasDiscount = await _discountService.GetDiscountAsync(discountCode);
+            if (hasDiscount is null)
+                return false;
+
+            basket.ApplyDiscount(hasDiscount.Code, hasDiscount.Rate);
             await SaveOrUpdateAsync(basket);
+
             return true;
         }
 
         public async Task<bool> CancelApplyDiscountAsync()
         {
             var basket = await GetAsync();
-
             if (basket is null || basket.DiscountCode is null)
                 return false;
 

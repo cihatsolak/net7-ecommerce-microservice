@@ -40,5 +40,24 @@
             var result = await _basketService.RemoveBasketItemAsync(courseId);
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["discountError"] = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).First();
+                return RedirectToAction(nameof(Index));
+            }
+            var discountStatus = await _basketService.ApplyDiscountAsync(discountApplyInput.Code);
+
+            TempData["discountStatus"] = discountStatus;
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> CancelApplyDiscount()
+        {
+            await _basketService.CancelApplyDiscountAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
