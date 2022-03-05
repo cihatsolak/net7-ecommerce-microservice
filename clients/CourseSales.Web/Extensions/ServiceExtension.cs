@@ -1,6 +1,4 @@
-﻿using CourseSales.Web.Services.Orders;
-
-namespace CourseSales.Web.Extensions
+﻿namespace CourseSales.Web.Extensions
 {
     public static class ServiceExtension
     {
