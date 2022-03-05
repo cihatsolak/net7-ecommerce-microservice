@@ -1,5 +1,3 @@
-using MassTransit;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var authorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
