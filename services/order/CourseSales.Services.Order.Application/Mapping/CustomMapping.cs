@@ -1,4 +1,6 @@
-﻿namespace CourseSales.Services.Order.Application.Mapping
+﻿using OrderItem = CourseSales.Services.Order.Domain.OrderAggregate.OrderItem;
+
+namespace CourseSales.Services.Order.Application.Mapping
 {
     internal class CustomMapping : Profile
     {

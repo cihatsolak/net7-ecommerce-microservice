@@ -92,7 +92,6 @@
             };
 
             var responsePayment = await _paymentService.ReceivePaymentAsync(paymentInfoInput);
-
             if (!responsePayment)
             {
                 return new OrderSuspendViewModel() { Error = "Ödeme alınamadı", IsSuccessful = false };

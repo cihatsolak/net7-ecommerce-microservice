@@ -1,6 +1,6 @@
 ﻿namespace CourseSales.Services.Order.Application.Queries
 {
-    public class GetOrdersByUserIdQuery : IRequest<Response<List<OrderDto>>>
+    public class GetOrdersByUserIdQuery : IRequest<Shared.DataTransferObjects.Response<List<OrderDto>>>
     {
         public string UserId { get; set; }
 
