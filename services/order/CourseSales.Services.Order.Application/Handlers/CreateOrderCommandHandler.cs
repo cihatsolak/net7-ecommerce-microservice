@@ -1,6 +1,6 @@
 ﻿namespace CourseSales.Services.Order.Application.Handlers
 {
-    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response<CreatedOrderDto>>
+    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Shared.DataTransferObjects.Response<CreatedOrderDto>>
     {
         private readonly OrderDbContext _context;
 
@@ -9,7 +9,7 @@
             _context = context;
         }
 
-        public async Task<Response<CreatedOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Shared.DataTransferObjects.Response<CreatedOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             Address address = new(
                 request.Address.Province,
@@ -29,7 +29,7 @@
             await _context.SaveChangesAsync(cancellationToken);
 
             CreatedOrderDto response = new() { OrderId = newOrder.Id };
-            return Response<CreatedOrderDto>.Success(response, HttpStatusCode.OK);
+            return Shared.DataTransferObjects.Response<CreatedOrderDto>.Success(response, HttpStatusCode.OK);
         }
     }
 }

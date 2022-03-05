@@ -22,6 +22,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.RequireHttpsMetadata = false;
     });
 
+builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
+{
+    serviceCollectionBusConfigurator.AddConsumer<CreateOrderMessageCommandConsumer>();
+
+    serviceCollectionBusConfigurator.UsingRabbitMq((busRegistrationContext, rabbitMqBusFactoryConfigurator) =>
+    {
+        string rabbitMQUrl = builder.Configuration["RabbitMQUrl"]; //Default port: 5672
+        rabbitMqBusFactoryConfigurator.Host(rabbitMQUrl, "/", hostConfigurator =>
+        {
+            hostConfigurator.Username("guest");
+            hostConfigurator.Password("guest");
+        });
+
+        rabbitMqBusFactoryConfigurator.ReceiveEndpoint("create-order-service", options =>
+        {
+            options.ConfigureConsumer<CreateOrderMessageCommandConsumer>(busRegistrationContext);
+        });
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
+
 builder.Services.AddMediatR(typeof(CreateOrderCommandHandler).Assembly);
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
