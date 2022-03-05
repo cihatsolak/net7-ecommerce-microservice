@@ -10,3 +10,4 @@ global using CourseSales.Services.Order.Application.Handlers;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc.Authorization;
+global using System.IdentityModel.Tokens.Jwt;

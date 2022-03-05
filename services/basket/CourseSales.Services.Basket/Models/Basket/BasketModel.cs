@@ -2,17 +2,12 @@
 {
     public class BasketModel
     {
-        public BasketModel()
-        {
-            BasketItemModel = new();
-        }
-
         public string UserId { get; set; }
         public string DiscountCode { get; set; }
         public int? DiscountRate { get; set; }
-        public List<BasketItemModel> BasketItemModel { get; set; }
+        public List<BasketItemModel> BasketItems { get; set; }
 
-        public decimal TotalPrice => BasketItemModel.Sum(item => item.Price * item.Quantity);
+        public decimal TotalPrice => BasketItems.Sum(item => item.Price * item.Quantity);
     }
 
     public class BasketItemModel

@@ -13,3 +13,4 @@ global using Microsoft.AspNetCore.Mvc.Authorization;
 global using CourseSales.Shared.Services;
 global using CourseSales.Shared.Controllers;
 global using Microsoft.AspNetCore.Mvc;
+global using System.IdentityModel.Tokens.Jwt;

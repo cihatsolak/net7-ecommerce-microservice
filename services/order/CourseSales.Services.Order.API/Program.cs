@@ -13,7 +13,7 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter(authorizationPolicy));
 });
-
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

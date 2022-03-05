@@ -27,7 +27,7 @@
             return CreateActionResultInstance(discountResponseModel);
         }
 
-        [HttpGet("{code:minlength(3)}")]
+        [HttpGet("{code:minlength(1)}")]
         public async Task<IActionResult> GetByCode(string code)
         {
             string userId = _sharedIdentityService.UserId;

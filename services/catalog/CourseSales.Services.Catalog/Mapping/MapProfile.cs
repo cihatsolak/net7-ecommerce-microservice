@@ -16,7 +16,7 @@
             CreateMap<Feature, FeatureResponseModel>();
 
             CreateMap<AddCourseRequstModel, Course>();
-            CreateMap<UpdateCourseRequstModel, Course>();
+            CreateMap<UpdateCourseRequestModel, Course>();
         }
 
         private void CategoryMaps()
