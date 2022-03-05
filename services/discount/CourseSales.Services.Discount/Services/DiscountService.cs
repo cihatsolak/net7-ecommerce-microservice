@@ -37,7 +37,7 @@
             }
 
             var discountResponseModel = discount.Adapt<DiscountResponseModel>();
-            return Response<DiscountResponseModel>.Success(discountResponseModel, HttpStatusCode.NotFound);
+            return Response<DiscountResponseModel>.Success(discountResponseModel, HttpStatusCode.OK);
         }
 
         public async Task<Response<DiscountResponseModel>> GetByIdAsync(int id)
@@ -49,7 +49,7 @@
             }
 
             var discountResponseModel = discount.Adapt<DiscountResponseModel>();
-            return Response<DiscountResponseModel>.Success(discountResponseModel, HttpStatusCode.NotFound);
+            return Response<DiscountResponseModel>.Success(discountResponseModel, HttpStatusCode.OK);
         }
 
         public async Task<Response<NoContentResponse>> AddAsync(DiscountRequestModel discountRequestModel)
