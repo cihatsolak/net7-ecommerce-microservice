@@ -2,6 +2,11 @@
 {
     public class CreateOrderMessageCommand
     {
+        public CreateOrderMessageCommand()
+        {
+            OrderItems = new List<OrderItem>();
+        }
+
         public string BuyerId { get; set; }
         public string Province { get; set; }
         public string District { get; set; }

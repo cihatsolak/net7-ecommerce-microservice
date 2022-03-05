@@ -6,3 +6,5 @@ global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc.Authorization;
 global using CourseSales.Services.Payment.Models;
+global using MassTransit;
+global using CourseSales.Shared.Messages.Commands;
