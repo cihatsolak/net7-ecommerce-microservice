@@ -1,0 +1,237 @@
+version: "3.8" #docker compose versiyonu : tool version. versiyone göre komutlar degisebilir
+
+services:
+  catalogdb: #servis ismi önemli. containerlar haberleşmelerini bu servis adından bulacak.
+    container_name: catalog-mongo-database
+    restart: always #docker açılıp-kapandığında container otomatik olarak ayağa kalksın.
+    ports:
+      - 27017:27017
+    volumes:
+      - catalogdb_volume:/data/db
+
+  basketdb:
+    container_name: basket-redis-database
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - basketdb_volume:/data
+
+  discountdb:
+    container_name: discount-postgre-database
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - discountdb_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Password123
+      - POSTGRES_DB=discountdb
+
+  identitydb:
+    container_name: identity-mssql-database
+    restart: always
+    ports:
+      - 1433:1433
+    volumes:
+      - identitydb_volume:/var/opt/mssqlql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123
+
+  orderdb:
+    container_name: order-mssql-database
+    restart: always
+    ports:
+      - 1444:1444
+    volumes:
+      - orderdb_volume:/var/opt/mssqlql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123
+
+  rabbitmq:
+    container_name: rabbitmq-middleware
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  catalog.api:
+    container_name: catalog-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim)
+      - IdentityServerUrl=https://identity.api
+      - DatabaseSetting:ConnectionString=mongodb://catalogdb:27017
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 7000:443 #7000 uygulamanın portu 443 contanier port.
+    depends_on:
+      - catalogdb
+      - identitydb
+      - rabbitmq
+  
+  identity.api:
+    container_name: identity-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ConnectionStrings:DefaultConnection=Server=identitydb,1433;Database=IdentityDb;User=sa;Password=Password123
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 5001:443 #7000 uygulamanın portu 443 contanier port.
+    depends_on:
+      - identitydb
+  
+  basket.api:
+    container_name: basket-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - RedisSetting:Host=basketdb
+      - RedisSetting:Port=6379
+      - IdentityServerUrl=https://identity.api
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 7004:443 #7004 uygulamanın portu 443 contanier port.
+    depends_on:
+      - identity.api
+      - rabbitmq
+      - basketdb
+
+  photostock.api:
+    container_name: photostock-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - IdentityServerUrl=https://identity.api
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      - type: bind
+        source: C:\Users\HPProbook\Desktop\photo
+        target: /app/wwwroot/photos #dockerize ederken klasörleri app içerisine kopyaladığımız için app diyoruz.
+    ports:
+      - 7002:443 #7002 uygulamanın portu 443 contanier port.
+    depends_on:
+      - identity.api
+
+  discount.api:
+    container_name: discount-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ConnectionStrings:NpgSql=User ID=admin;Password=Password123;Server=discountdb;Port=5432;Database=discountdb;Integrated Security=true;Pooling=true
+      - IdentityServerUrl=https://identity.api
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 7006:443 #7006 uygulamanın portu 443 contanier port.
+    depends_on:
+      - identity.api
+      - discountdb
+
+  payment.api:
+    container_name: payment-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - IdentityServerUrl=https://identity.api
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 7010:443 #7010 uygulamanın portu 443 contanier port.
+    depends_on:
+      - identity.api
+      - rabbitmq
+  
+  order.api:
+    container_name: order-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - IdentityServerUrl=https://identity.api
+      - ConnectionStrings:DefaultConnection=Server=orderdb,1444;Database=OrderDb;User=sa;Password=Password123
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 7008:443 #7008 uygulamanın portu 443 contanier port.
+    depends_on:
+      - identity.api
+      - rabbitmq
+      - orderdb
+  
+  gateway.api:
+    container_name: gateway-service
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - IdentityServerUrl=https://identity.api
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 4500:443 #7008 uygulamanın portu 443 contanier port.
+    depends_on:
+      - catalog.api
+      - identity.api
+      - basket.api
+      - photostock.api
+      - discount.api
+      - payment.api
+      - order.api
+  
+  client.web:
+    container_name: client-web
+    # restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=j8c5TBxNyrxMtQCT
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ServiceApiSettings:IdentityBaseUri=https://identity.api
+      - ServiceApiSettings:GatewayBaseUri=https://gateway.api
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 2500:443 #7008 uygulamanın portu 443 contanier port.
+    depends_on:
+      - catalog.api
+      - identity.api
+      - basket.api
+      - photostock.api
+      - discount.api
+      - payment.api
+      - order.api
+      - gateway.api
