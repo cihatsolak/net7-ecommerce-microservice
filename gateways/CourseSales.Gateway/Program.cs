@@ -7,7 +7,9 @@ builder.WebHost.ConfigureAppConfiguration((hostingContext, configure) =>
     .AddEnvironmentVariables();
 });
 
-builder.Services.AddOcelot();
+builder.Services.AddHttpClient<TokenExchangeDelegateHandler>();
+
+builder.Services.AddOcelot().AddDelegatingHandler<TokenExchangeDelegateHandler>();
 
 builder.Services.AddAuthentication().AddJwtBearer("GatewayAuthenticationSchema", options =>
 {
