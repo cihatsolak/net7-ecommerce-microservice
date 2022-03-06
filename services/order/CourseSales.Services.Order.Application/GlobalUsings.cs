@@ -11,3 +11,4 @@ global using CourseSales.Services.Order.Application.Commands;
 global using CourseSales.Services.Order.Application.Mapping;
 global using CourseSales.Shared.Messages.Commands;
 global using MassTransit;
+global using CourseSales.Shared.Messages.Events;
