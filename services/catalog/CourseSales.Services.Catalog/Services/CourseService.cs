@@ -1,4 +1,7 @@
-﻿namespace CourseSales.Services.Catalog.Services
+﻿using CourseSales.Shared.Messages.Events;
+using Mass = MassTransit;
+
+namespace CourseSales.Services.Catalog.Services
 {
     public interface ICourseService
     {
@@ -12,15 +15,18 @@
 
     public sealed class CourseManager : ICourseService
     {
+        private readonly Mass.IPublishEndpoint _publishEndpoint;
         private readonly IMongoContext _mongoContext;
         private readonly IMapper _mapper;
 
         public CourseManager(
             IMapper mapper,
-            IMongoContext mongoContext)
+            IMongoContext mongoContext, 
+            Mass.IPublishEndpoint publishEndpoint)
         {
             _mongoContext = mongoContext;
             _mapper = mapper;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task<Response<List<CourseResponseModel>>> GetAllAsync()
@@ -91,6 +97,14 @@
             {
                 return Response<NoContentResponse>.Fail("Kurs bulunamadı.", HttpStatusCode.NotFound);
             }
+
+            CourseNameChangedEvent courseNameChangedEvent = new()
+            {
+                CourseId = course.Id,
+                UpdatedName = course.Name
+            };
+
+            await _publishEndpoint.Publish<CourseNameChangedEvent>(courseNameChangedEvent);
 
             return Response<NoContentResponse>.Success(HttpStatusCode.OK);
         }
