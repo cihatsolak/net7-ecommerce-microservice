@@ -1,4 +1,4 @@
-using System.IdentityModel.Tokens.Jwt;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.Audience = "resource_basket";
         options.RequireHttpsMetadata = false;
     });
+
+builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
+{
+    serviceCollectionBusConfigurator.AddConsumer<CourseNameChangedEventConsumer>();
+
+    serviceCollectionBusConfigurator.UsingRabbitMq((busRegistrationContext, rabbitMqBusFactoryConfigurator) =>
+    {
+        string rabbitMQUrl = builder.Configuration["RabbitMQUrl"]; //Default port: 5672
+        rabbitMqBusFactoryConfigurator.Host(rabbitMQUrl, "/", hostConfigurator =>
+        {
+            hostConfigurator.Username("guest");
+            hostConfigurator.Password("guest");
+        });
+
+        rabbitMqBusFactoryConfigurator.ReceiveEndpoint("course-name-changed-event-basket-service", options =>
+        {
+            options.ConfigureConsumer<CourseNameChangedEventConsumer>(busRegistrationContext);
+        });
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 builder.Services.AddScoped<IBasketService, BasketService>();

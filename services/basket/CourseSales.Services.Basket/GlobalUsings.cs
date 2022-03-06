@@ -12,3 +12,6 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc.Authorization;
+global using Mass = MassTransit;
+global using System.IdentityModel.Tokens.Jwt;
+global using CourseSales.Services.Basket.Consumers;

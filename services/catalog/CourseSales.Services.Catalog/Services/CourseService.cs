@@ -101,7 +101,7 @@ namespace CourseSales.Services.Catalog.Services
             CourseNameChangedEvent courseNameChangedEvent = new()
             {
                 CourseId = course.Id,
-                UpdatedName = course.Name
+                UpdatedName = updateCourseRequestModel.Name
             };
 
             await _publishEndpoint.Publish<CourseNameChangedEvent>(courseNameChangedEvent);
