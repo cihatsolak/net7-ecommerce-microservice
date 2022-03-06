@@ -25,6 +25,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
 {
     serviceCollectionBusConfigurator.AddConsumer<CreateOrderMessageCommandConsumer>();
+    serviceCollectionBusConfigurator.AddConsumer<CourseNameChangedEventConsumer>();
 
     serviceCollectionBusConfigurator.UsingRabbitMq((busRegistrationContext, rabbitMqBusFactoryConfigurator) =>
     {
@@ -38,6 +39,11 @@ builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
         rabbitMqBusFactoryConfigurator.ReceiveEndpoint("create-order-service", options =>
         {
             options.ConfigureConsumer<CreateOrderMessageCommandConsumer>(busRegistrationContext);
+        });
+
+        rabbitMqBusFactoryConfigurator.ReceiveEndpoint("course-name-changed-event-order-service", options =>
+        {
+            options.ConfigureConsumer<CourseNameChangedEventConsumer>(busRegistrationContext);
         });
     });
 });

@@ -1,3 +1,5 @@
+using MassTransit;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options =>
@@ -23,6 +25,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.Audience = "resource_catalog";
         options.RequireHttpsMetadata = false;
     });
+
+builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
+{
+    serviceCollectionBusConfigurator.UsingRabbitMq((busRegistrationContext, rabbitMqBusFactoryConfigurator) =>
+    {
+        string rabbitMQUrl = builder.Configuration["RabbitMQUrl"]; //Default port: 5672
+        rabbitMqBusFactoryConfigurator.Host(rabbitMQUrl, "/", hostConfigurator =>
+        {
+            hostConfigurator.Username("guest");
+            hostConfigurator.Password("guest");
+        });
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
 
 var app = builder.Build();
 
