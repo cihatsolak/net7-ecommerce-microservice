@@ -2,108 +2,114 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7000
+          "Host": "catalog.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/services/catalog/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "https",
+      "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "catalog_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Catalog"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7002
+          "Host": "photostock.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/services/photostock/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "https",
+      "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "photo_stock_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Photostock"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7004
+          "Host": "basket.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/services/basket/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "https",
+      "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "basket_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Basket"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7006
+          "Host": "discount.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/services/discount/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "https",
+      "UpstreamScheme": "http",
       "DelegatingHandlers": [ "TokenExchangeDelegateHandler" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema"
       },
+      "SwaggerKey": "Discount"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7008
+          "Host": "order.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/services/order/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "https",
+      "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "order_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Order"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7010
+          "Host": "payment.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/services/payment/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
-      "UpstreamScheme": "https",
+      "UpstreamScheme": "http",
       "DelegatingHandlers": [ "TokenExchangeDelegateHandler" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema"
-      }
+      },
+      "SwaggerKey": "Payment"
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:4500"
+    "BaseUrl": "http://gateway.api"
   }
 }

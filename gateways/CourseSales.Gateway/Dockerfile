@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim as sdk
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 COPY gateways/CourseSales.Gateway/*.csproj gateways/CourseSales.Gateway/
 RUN dotnet restore gateways/CourseSales.Gateway/*.csproj

@@ -5,8 +5,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "catalog.api",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 7000
         }
       ],
       "UpstreamPathTemplate": "/services/catalog/{everything}",
@@ -15,15 +15,16 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "catalog_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Catalog"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "photostock.api",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 7002
         }
       ],
       "UpstreamPathTemplate": "/services/photostock/{everything}",
@@ -32,15 +33,16 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "photo_stock_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Photostock"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "basket.api",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 7004
         }
       ],
       "UpstreamPathTemplate": "/services/basket/{everything}",
@@ -49,15 +51,16 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "basket_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Basket"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "discount.api",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/services/discount/{everything}",
@@ -66,15 +69,16 @@
       "DelegatingHandlers": [ "TokenExchangeDelegateHandler" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema"
-      }
+      },
+      "SwaggerKey": "Discount"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "order.api",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/services/order/{everything}",
@@ -83,15 +87,16 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema",
         "AllowedScopes": [ "order_fullpermission" ]
-      }
+      },
+      "SwaggerKey": "Order"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "payment.api",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 7010
         }
       ],
       "UpstreamPathTemplate": "/services/payment/{everything}",
@@ -100,10 +105,8 @@
       "DelegatingHandlers": [ "TokenExchangeDelegateHandler" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationSchema"
-      }
+      },
+      "SwaggerKey": "Payment"
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://gateway.api:443"
-  }
+  ]
 }

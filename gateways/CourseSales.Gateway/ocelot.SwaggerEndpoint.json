@@ -1,0 +1,64 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "Catalog",
+      "Config": [
+        {
+          "Name": "Catalog API",
+          "Version": "v1",
+          "Url": "https://localhost:7000/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Photostock",
+      "Config": [
+        {
+          "Name": "Photostock API",
+          "Version": "v1",
+          "Url": "https://localhost:7002/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Basket",
+      "Config": [
+        {
+          "Name": "Basket API",
+          "Version": "v1",
+          "Url": "https://localhost:7004/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Discount",
+      "Config": [
+        {
+          "Name": "Discount API",
+          "Version": "v1",
+          "Url": "https://localhost:7006/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Order",
+      "Config": [
+        {
+          "Name": "Order API",
+          "Version": "v1",
+          "Url": "https://localhost:7008/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Payment",
+      "Config": [
+        {
+          "Name": "Payment API",
+          "Version": "v1",
+          "Url": "https://localhost:7010/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
