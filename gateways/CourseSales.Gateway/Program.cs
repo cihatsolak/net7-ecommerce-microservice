@@ -10,7 +10,7 @@ builder.WebHost.ConfigureAppConfiguration((hostingContext, configure) =>
              .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
              .AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
              .AddJsonFile($"ocelot.global.json", true, true)
-             .AddJsonFile($"ocelot.SwaggerEndpoint.json", true, true)
+             .AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.SwaggerEndpoint.json", true, true)
              .AddEnvironmentVariables();
 });
 
