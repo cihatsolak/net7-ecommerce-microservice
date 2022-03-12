@@ -4,11 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>eacb5c40-2ae1-4ae3-ad0f-61cad1b104b3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+    <PackageReference Include="MMLib.SwaggerForOcelot" Version="4.8.0" />
     <PackageReference Include="Ocelot" Version="18.0.0" />
   </ItemGroup>
 

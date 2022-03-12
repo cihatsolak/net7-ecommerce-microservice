@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseAuthentication();
 app.MapControllers();
-app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.Run();

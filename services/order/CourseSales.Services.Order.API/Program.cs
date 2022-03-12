@@ -60,13 +60,20 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+await using (AsyncServiceScope asyncServiceScope = app.Services.CreateAsyncScope())
+{
+    IServiceProvider serviceProvider = asyncServiceScope.ServiceProvider;
+    OrderDbContext orderDbContext = serviceProvider.GetRequiredService<OrderDbContext>();
+    await orderDbContext.Database.MigrateAsync();
+};
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

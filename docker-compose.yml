@@ -1,0 +1,76 @@
+version: "3.8" #docker compose versiyonu : tool version. versiyone göre komutlar degisebilir
+
+services:
+  catalogdb: #servis ismi önemli. containerlar haberleşmelerini bu servis adından bulacak.
+    image: mongo
+  basketdb:
+    image: redis #image ismini dockerhub'a bakarak dogru şekilde yazmalıyız.
+  discountdb:
+    image: postgres
+  identitydb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  rabbitmq:
+    image: rabbitmq:3.9.13-management
+  
+  catalog.api:
+    image: catalog-service-image
+    build: 
+      context: .
+      dockerfile: services/catalog/CourseSales.Services.Catalog/Dockerfile  #dockerfile nerede?
+
+  identity.api:
+    image: identity-service-image
+    build: 
+      context: .
+      dockerfile: identityserver/CourseSales.IdentityServer/Dockerfile 
+
+  basket.api:
+    image: basket-service-image
+    build: 
+      context: .
+      dockerfile: services/basket/CourseSales.Services.Basket/Dockerfile
+
+  photostock.api:
+    image: photostock-service-image
+    build: 
+      context: .
+      dockerfile: services/photostock/CourseSales.Services.PhotoStock/Dockerfile
+
+  discount.api:
+    image: discount-service-image
+    build: 
+      context: .
+      dockerfile: services/discount/CourseSales.Services.Discount/Dockerfile     
+
+  payment.api:
+    image: payment-service-image
+    build: 
+      context: .
+      dockerfile: services/payment/CourseSales.Services.Payment/Dockerfile 
+
+  order.api:
+    image: order-service-image
+    build: 
+      context: .
+      dockerfile: services/order/CourseSales.Services.Order.API/Dockerfile   
+  
+  gateway.api:
+    image: gateway-service-image
+    build: 
+      context: .
+      dockerfile: gateways/CourseSales.Gateway/Dockerfile
+
+  client.web:
+    image: client-web-image
+    build: 
+      context: .
+      dockerfile: clients/CourseSales.Web/Dockerfile
+
+volumes: #Container içerisindeki verilerin kalıcı olması için volume kullanıyoruz.
+  catalogdb_volume:
+  basketdb_volume:
+  discountdb_volume:
+  identitydb_volume:
+  orderdb_volume:

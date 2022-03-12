@@ -25,6 +25,9 @@
         public async Task<IActionResult> Create()
         {
             var categories = await _catalogService.GetAllCategoryAsync();
+            if (categories is null)
+                categories = new();
+
             ViewBag.CategoryList = new SelectList(categories, "Id", "Name");
             return View();
         }
