@@ -63,7 +63,7 @@ services:
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - RabbitMQUrl=rabbitmq
+      - - RabbitMQUrl=rabbitmq
       - IdentityServerURL=http://identityserver.api
       - DatabaseSetting:ConnectionString=mongodb://catalogdb:27017
     ports:
@@ -92,7 +92,7 @@ services:
       - RedisSetting:Host=basketdb
       - RedisSetting:Port=6379
       - IdentityServerURL=http://identityserver.api
-      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
     ports:
       - 7005:80
     depends_on:
@@ -133,7 +133,7 @@ services:
     # restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
       - IdentityServerURL=http://identityserver.api
     ports:
       - 7011:80
@@ -146,9 +146,9 @@ services:
     # restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
       - IdentityServerURL=http://identityserver.api
-      - ConnectionStrings:DefaultConnection=Server=orderdb,1444;Database=OrderDb;User=sa;Password=Password123
+      - ConnectionStrings:DefaultConnection=Server=orderdb,1433;Database=OrderDb;User=sa;Password=Password123
     ports:
       - 7009:80
     depends_on:
