@@ -63,8 +63,8 @@ services:
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - - RabbitMQUrl=rabbitmq
-      - IdentityServerURL=http://identityserver.api
+      - RabbitMQUrl=rabbitmq
+      - IdentityServerURL=http://identity.api
       - DatabaseSetting:ConnectionString=mongodb://catalogdb:27017
     ports:
       - 7001:80
@@ -91,8 +91,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - RedisSetting:Host=basketdb
       - RedisSetting:Port=6379
-      - IdentityServerURL=http://identityserver.api
-      - - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - IdentityServerURL=http://identity.api
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
     ports:
       - 7005:80
     depends_on:
@@ -105,7 +105,7 @@ services:
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - IdentityServerURL=http://identityserver.api
+      - IdentityServerURL=http://identity.api
     volumes:
       - type: bind
         source: C:\Users\HPProbook\Desktop\photo
@@ -117,11 +117,11 @@ services:
 
   discount.api:
     container_name: discount-service
-    # restart: on-failure
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings:NpgSql=User ID=admin;Password=Password123;Server=discountdb;Port=5432;Database=discountdb;Integrated Security=true;Pooling=true
-      - IdentityServerURL=http://identityserver.api
+      - IdentityServerURL=http://identity.api
     ports:
       - 7007:80
     depends_on:
@@ -133,8 +133,8 @@ services:
     # restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
-      - IdentityServerURL=http://identityserver.api
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - IdentityServerURL=http://identity.api
     ports:
       - 7011:80
     depends_on:
@@ -143,11 +143,11 @@ services:
   
   order.api:
     container_name: order-service
-    # restart: on-failure
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
-      - IdentityServerURL=http://identityserver.api
+      - RabbitMQUrl=rabbitmq #rabbitmq -> servis ismi (services altındaki isim) 
+      - IdentityServerURL=http://identity.api
       - ConnectionStrings:DefaultConnection=Server=orderdb,1433;Database=OrderDb;User=sa;Password=Password123
     ports:
       - 7009:80
@@ -158,10 +158,10 @@ services:
   
   gateway.api:
     container_name: gateway-service
-    # restart: on-failure
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - IdentityServerURL=http://identityserver.api
+      - IdentityServerURL=http://identity.api
     ports:
       - 4501:80
     depends_on:
@@ -175,12 +175,11 @@ services:
   
   client.web:
     container_name: client-web
-    # restart: on-failure
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ServiceApiSettings:IdentityBaseUri=http://identity.api
       - ServiceApiSettings:GatewayBaseUri=http://gateway.api
-      - ServiceApiSettings:PhotoStockUri=http://photostock.api
     ports:
       - 2501:80
     depends_on:
