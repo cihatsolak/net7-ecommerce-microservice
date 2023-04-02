@@ -48,8 +48,6 @@ builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
     });
 });
 
-builder.Services.AddMassTransitHostedService();
-
 builder.Services.AddMediatR(typeof(CreateOrderCommandHandler).Assembly);
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 

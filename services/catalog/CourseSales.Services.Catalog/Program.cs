@@ -32,7 +32,7 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] { }
+            Array.Empty<string>()
         }
     });
 });
@@ -67,8 +67,6 @@ builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
     });
 });
 
-builder.Services.AddMassTransitHostedService();
-
 var app = builder.Build();
 
 await using (AsyncServiceScope asyncServiceScope = app.Services.CreateAsyncScope())
@@ -80,12 +78,12 @@ await using (AsyncServiceScope asyncServiceScope = app.Services.CreateAsyncScope
     {
         await categoryService.InsertAsync(new AddCategoryRequestModel
         {
-            Name = "Sýfýrdan Ýleri Seviye Vue.JS Eðitimi ve Uygulama Geliþtirme"
+            Name = "Sï¿½fï¿½rdan ï¿½leri Seviye Vue.JS Eï¿½itimi ve Uygulama Geliï¿½tirme"
         });
 
         await categoryService.InsertAsync(new AddCategoryRequestModel
         {
-            Name = "Azure DevOps : Sýfýrdan Ýleri Seviye"
+            Name = "Azure DevOps : Sï¿½fï¿½rdan ï¿½leri Seviye"
         });
     }
 };
