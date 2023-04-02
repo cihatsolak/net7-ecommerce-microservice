@@ -1,0 +1,59 @@
+version: "3.8" #docker compose versiyonu : tool version. versiyone göre komutlar degisebilir
+
+services:
+  catalogdb: #servis ismi önemli. containerlar haberleşmelerini bu servis adından bulacak.
+    container_name: catalog-mongo-database
+    restart: always #docker açılıp-kapandığında container otomatik olarak ayağa kalksın.
+    ports:
+      - 27017:27017
+    volumes:
+      - catalogdb_volume:/data/db
+
+  basketdb:
+    container_name: basket-redis-database
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - basketdb_volume:/data
+
+  discountdb:
+    container_name: discount-postgre-database
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - discountdb_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Password123
+      - POSTGRES_DB=discountdb
+
+  identitydb:
+    container_name: identity-mssql-database
+    restart: always
+    ports:
+      - 1433:1433
+    volumes:
+      - identitydb_volume:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123
+
+  orderdb:
+    container_name: order-mssql-database
+    restart: always
+    ports:
+      - 1444:1433
+    volumes:
+      - orderdb_volume:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123
+
+  rabbitmq:
+    container_name: rabbitmq-middleware
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
