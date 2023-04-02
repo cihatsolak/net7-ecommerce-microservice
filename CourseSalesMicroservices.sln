@@ -57,6 +57,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseSales.Web", "clients\CourseSales.Web\CourseSales.Web.csproj", "{7ED17D97-C509-4079-A564-5505E057078B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database-compose", "database-compose", "{59D6B601-060F-4F17-8E9F-5115E5A77834}"
+	ProjectSection(SolutionItems) = preProject
+		docs\database-compose\docker-compose.override.yml = docs\database-compose\docker-compose.override.yml
+		docs\database-compose\docker-compose.yml = docs\database-compose\docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
