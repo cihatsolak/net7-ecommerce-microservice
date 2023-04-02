@@ -41,7 +41,6 @@ builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
     });
 });
 
-builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 builder.Services.AddScoped<IBasketService, BasketService>();

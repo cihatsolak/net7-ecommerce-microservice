@@ -2,9 +2,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureAppConfiguration((hostingContext, configure) =>
 {
-    
-
-    
     configure.SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
              .AddJsonFile("appsettings.json", true, true)
              .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
@@ -20,8 +17,6 @@ builder.Services.AddOcelot(builder.Configuration).AddDelegatingHandler<TokenExch
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
 builder.Services.AddHttpClient<TokenExchangeDelegateHandler>();
-
-
 
 builder.Services.AddAuthentication().AddJwtBearer("GatewayAuthenticationSchema", options =>
 {

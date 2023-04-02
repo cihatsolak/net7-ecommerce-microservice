@@ -27,10 +27,6 @@ builder.Services.AddMassTransit(serviceCollectionBusConfigurator =>
     });
 });
 
-builder.Services.AddMassTransitHostedService();
-
-
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

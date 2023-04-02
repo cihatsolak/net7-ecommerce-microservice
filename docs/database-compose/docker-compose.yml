@@ -1,0 +1,22 @@
+version: "3.8" #docker compose versiyonu : tool version. versiyone göre komutlar degisebilir
+
+services:
+  catalogdb: #servis ismi önemli. containerlar haberleşmelerini bu servis adından bulacak.
+    image: mongo
+  basketdb:
+    image: redis #image ismini dockerhub'a bakarak dogru şekilde yazmalıyız.
+  discountdb:
+    image: postgres
+  identitydb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  rabbitmq:
+    image: rabbitmq:3.11.11-management
+
+volumes: #Container içerisindeki verilerin kalıcı olması için volume kullanıyoruz.
+  catalogdb_volume:
+  basketdb_volume:
+  discountdb_volume:
+  identitydb_volume:
+  orderdb_volume:
